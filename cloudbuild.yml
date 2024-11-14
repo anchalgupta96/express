@@ -19,5 +19,6 @@ steps:
     #dir: '/app/express'
 
 # Substitutions for environment-specific settings
+logging: CLOUD_LOGGING_ONLY
 substitutions:
   _ENV: staging
