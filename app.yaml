@@ -1,0 +1,27 @@
+# [START runtime]
+service: test-build-service
+runtime: nodejs
+env: flex
+
+runtime_config:
+  operating_system: "ubuntu22"
+  runtime_version: "22"
+#instance_class: F4
+# [START resources]
+resources:
+  cpu: 1
+  memory_gb: 2
+  disk_size_gb: 10
+# [END resources]
+
+# [START scaling]
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 1
+  cool_down_period_sec: 60
+  cpu_utilization:
+    target_utilization: 0.8
+# [END scaling]
+
+env_variables:
+  NODE_ENV: production
