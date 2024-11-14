@@ -2,7 +2,7 @@ steps:
   # Step 1: Install dependencies
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install']
-    dir: '/app/express'
+    #dir: 'express'
 
   # Step 2: Deploy to App Engine with specific service and version
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -16,7 +16,7 @@ steps:
        # '--version=${_ENV}-version-${SHORT_SHA}',
        # '--no-promote'
       ]
-    dir: '/app/express'
+    #dir: '/app/express'
 
 # Substitutions for environment-specific settings
 substitutions:
