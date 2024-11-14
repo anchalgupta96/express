@@ -1,24 +1,23 @@
-# [START runtime]
-service: test-build-service
-runtime: nodejs
-env: flex
+steps:
+  # Step 1: Install dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+    dir: 'express'
 
-#instance_class: F4
-# [START resources]
-resources:
-  cpu: 1
-  memory_gb: 2
-  disk_size_gb: 10
-# [END resources]
+  # Step 2: Deploy to App Engine with specific service and version
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'app',
+        'deploy',
+        'app.yaml',
+        '--quiet',
+        #'--project=[YOUR_PROJECT_ID]',
+       # '--version=${_ENV}-version-${SHORT_SHA}',
+       # '--no-promote'
+      ]
+    dir: 'express'
 
-# [START scaling]
-automatic_scaling:
-  min_num_instances: 1
-  max_num_instances: 1
-  cool_down_period_sec: 60
-  cpu_utilization:
-    target_utilization: 0.8
-# [END scaling]
-
-env_variables:
-  NODE_ENV: production
+# Substitutions for environment-specific settings
+substitutions:
+  _ENV: staging
